@@ -1,0 +1,54 @@
+{
+  "nav": {
+    "hotels": "Hotels",
+    "dharamshalas": "Dharamshalas",
+    "cabs": "Cabs",
+    "packages": "Packages",
+    "temples": "Temples",
+    "routes": "Braj Routes",
+    "live": "Live Darshan",
+    "support": "Support",
+    "login": "Log in",
+    "vendor": "List your service",
+    "menu": "Open navigation",
+    "home": "Home"
+  },
+  "home": {
+    "eyebrow": "Trusted Braj pilgrimage planning",
+    "title": "Braj’s sacred journey, all in one place",
+    "description": "A calm, reliable foundation for verified stays, trusted transport, temple information and senior-friendly journey planning.",
+    "primary": "Plan my Braj yatra",
+    "secondary": "Explore Braj temples",
+    "note": "Phase 1 establishes the platform foundation. Search and booking experiences arrive in the next product phases.",
+    "promise": "Fair access for every devotee",
+    "disclaimer": "Shikhar Darshan Braj does not sell VIP darshan, guaranteed temple entry or unauthorised priority access."
+  },
+  "footer": {
+    "line": "Darshan, Yatra, Seva and Sahayata — on one trusted platform.",
+    "rights": "All rights reserved.",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "safety": "Safety",
+    "verify": "Always verify temple schedules before travelling.",
+    "explore": "Explore",
+    "help": "Help",
+    "legal": "Legal",
+    "destinations": "Destinations",
+    "temples": "Temples",
+    "stays": "Stays",
+    "packages": "Packages",
+    "customerHelp": "Customer help",
+    "accessibility": "Accessibility"
+  },
+  "common": {
+    "skip": "Skip to main content",
+    "loading": "Preparing your journey…",
+    "retry": "Try again",
+    "errorTitle": "Something interrupted the journey",
+    "errorText": "We could not load this page safely. Please try again.",
+    "notFoundTitle": "This path is not on our yatra map",
+    "notFoundText": "The page may have moved or the address may be incomplete.",
+    "backHome": "Return home",
+    "language": "हिंदी"
+  }
+}

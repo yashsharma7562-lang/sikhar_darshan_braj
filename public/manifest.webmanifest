@@ -1,0 +1,11 @@
+{
+  "name": "Shikhar Darshan Braj",
+  "short_name": "Shikhar Darshan",
+  "description": "Trusted Braj pilgrimage planning and assistance.",
+  "start_url": "/en",
+  "display": "standalone",
+  "background_color": "#FFF9EF",
+  "theme_color": "#F47B20",
+  "lang": "en-IN",
+  "dir": "ltr"
+}

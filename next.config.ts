@@ -1,0 +1,24 @@
+import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
+import { securityHeaders } from "./src/lib/security/security-headers";
+
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
+
+const nextConfig: NextConfig = {
+  poweredByHeader: false,
+  reactStrictMode: true,
+  compress: true,
+  images: { formats: ["image/avif", "image/webp"] },
+  turbopack: { root: process.cwd() },
+  experimental: { typedEnv: true },
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [...securityHeaders(process.env.NODE_ENV === "production")],
+      },
+    ];
+  },
+};
+
+export default withNextIntl(nextConfig);

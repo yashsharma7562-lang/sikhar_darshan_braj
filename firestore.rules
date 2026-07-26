@@ -1,0 +1,75 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+    function owns(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+    function hasPermission(permission) {
+      return signedIn()
+        && request.auth.token.permissions is list
+        && request.auth.token.permissions.hasAny([permission]);
+    }
+    function sameOrganisation(organisationId) {
+      return signedIn()
+        && request.auth.token.organisationId == organisationId;
+    }
+
+    match /users/{userId} {
+      allow read: if owns(userId) || hasPermission('admin.users.read');
+      allow create: if owns(userId);
+      allow update: if owns(userId)
+        && !request.resource.data.diff(resource.data).affectedKeys()
+          .hasAny(['roles', 'permissions', 'organisationId', 'blocked']);
+      allow delete: if false;
+    }
+    match /userConsents/{consentId} {
+      allow read: if signedIn() && resource.data.userId == request.auth.uid;
+      allow create: if signedIn()
+        && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if false;
+    }
+    match /{collection}/{documentId} {
+      allow read: if collection in [
+        'destinations',
+        'pilgrimageCircuits',
+        'temples',
+        'templeSchedules',
+        'templeNotices',
+        'templeFacilities',
+        'festivals',
+        'culturalArticles',
+        'emergencyResources'
+      ] && resource.data.published == true;
+      allow write: if false;
+    }
+    match /{collection}/{documentId} {
+      allow read: if collection in [
+        'bookings',
+        'userItineraries',
+        'journeyProgress',
+        'wishlists',
+        'notifications',
+        'loyaltyTransactions',
+        'referrals'
+      ] && signedIn() && resource.data.userId == request.auth.uid;
+      allow write: if false;
+    }
+    match /vendors/{vendorId} {
+      allow read: if sameOrganisation(resource.data.organisationId)
+        || hasPermission('admin.vendors.read');
+      allow write: if false;
+    }
+    match /supportTickets/{ticketId} {
+      allow read: if signedIn()
+        && (resource.data.customerId == request.auth.uid
+          || hasPermission('support.tickets.read'));
+      allow write: if false;
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

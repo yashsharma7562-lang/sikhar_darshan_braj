@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "replace-with-non-production-project-id",
+    "production": "replace-with-production-project-id"
+  }
+}
