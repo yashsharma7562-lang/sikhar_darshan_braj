@@ -48,4 +48,5 @@ provider behavior remain fail-closed until their production credentials,
 infrastructure and operational approvals are configured.
 
 The platform does not sell VIP darshan, guaranteed temple entry or unauthorised priority access.
+
 # sikhar_darshan_braj

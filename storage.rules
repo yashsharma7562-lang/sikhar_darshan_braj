@@ -1,0 +1,42 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function signedIn() {
+      return request.auth != null;
+    }
+    function hasPermission(permission) {
+      return signedIn()
+        && request.auth.token.permissions is list
+        && request.auth.token.permissions.hasAny([permission]);
+    }
+    function safeImage() {
+      return request.resource.size < 10 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+    function safePdf() {
+      return request.resource.size < 10 * 1024 * 1024
+        && request.resource.contentType == 'application/pdf';
+    }
+
+    match /public/{allPaths=**} {
+      allow read: if true;
+      allow write: if hasPermission('content.publish') && safeImage();
+    }
+    match /customer-documents/{userId}/{allPaths=**} {
+      allow read: if signedIn() && request.auth.uid == userId;
+      allow write: if false;
+    }
+    match /vendor-documents/{organisationId}/{allPaths=**} {
+      allow read: if signedIn()
+        && (request.auth.token.organisationId == organisationId
+          || hasPermission('admin.vendors.read'));
+      allow create: if signedIn()
+        && request.auth.token.organisationId == organisationId
+        && safePdf();
+      allow update, delete: if false;
+    }
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
