@@ -71,5 +71,9 @@
       "postcss": "8.5.22"
     },
     "sharp": "0.35.3"
-  }
+  },
+  "engines": {
+    "node": ">=22.22.1"
+  },
+  "packageManager": "npm@11.6.2"
 }
