@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shikhar Darshan Braj
 
-## Getting Started
+Production-oriented foundation for a trusted, accessible Braj pilgrimage planning platform.
 
-First, run the development server:
+## Local setup
 
-```bash
+```powershell
+Copy-Item .env.example .env.local
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000/en` or `http://localhost:3000/hi`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Verification
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```powershell
+npm run format:check
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npm audit --omit=dev
+```
 
-## Learn More
+The full local gate is available as npm run check. Deployment configuration
+and operational gates are documented in docs/deployment. Repository files do
+not mean that Firebase, Vercel, DNS, payments or monitoring are connected.
 
-To learn more about Next.js, take a look at the following resources:
+## Architecture
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `src/app`: App Router entry points, locale layouts and route-level states.
+- `src/components`: reusable UI, layout, forms, booking and accessibility components.
+- `src/features`: bounded product features such as temples, stays, payments and support.
+- `src/domain`: provider-independent entities, value objects, policies and services.
+- `src/infrastructure`: Firebase, Razorpay, Redis, maps, search and messaging adapters.
+- `src/config`: environment and application configuration.
+- `src/i18n` and `messages`: locale routing and English/Hindi message catalogues.
+- `src/lib`: validation, security, logging, errors and shared utilities.
+- `src/tests`: shared test configuration.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Delivery status
 
-## Deploy on Vercel
+Phases 1–19 provide the application architecture, public and role-based
+experiences, booking and payment boundaries, domain tests, security hardening,
+CI, provider policy files and deployment runbooks. Real persistence and external
+provider behavior remain fail-closed until their production credentials,
+infrastructure and operational approvals are configured.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The platform does not sell VIP darshan, guaranteed temple entry or unauthorised priority access.
+# sikhar_darshan_braj
